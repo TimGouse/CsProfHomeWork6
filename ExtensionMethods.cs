@@ -6,21 +6,19 @@ namespace CsProfHomeWork6
 {
     public static class ExtensionMethods
     {
-        public static T GetMax<T>(this IEnumerable<T> e, Func<T, float> getParameter) where T : class
+        public static T GetMax<T>(this IEnumerable<T> collection, Func<T, float> convertToNumber) where T : class
         {
+            float maxVal = float.MinValue;
             T maxItem = null;
-            float maxParameter = float.MinValue;
-
-            foreach (T item in e)
+            foreach (var item in collection)
             {
-                float parameter = getParameter(item);
-                if (parameter > maxParameter)
+                var val = convertToNumber(item);
+                if (val > maxVal)
                 {
-                    maxParameter = parameter;
+                    maxVal = val;
                     maxItem = item;
                 }
             }
-
             return maxItem;
         }
     }
